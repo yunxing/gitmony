@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GitMoney</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/prettify.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap-multiselect.css') }}">
+  <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/prettify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/knockout-2.3.0.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-multiselect.js') }}"></script>
+  <!-- <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}"> -->
+</head>
+<body>
+  <canvas id="canvas" style="display:none;"></canvas>
+  <div class="container">
+    <div class="hero-unit" id="head-hero">
+      <div class="row-fluid">
+        <div class="span8">
+            <table class="table">
+
+              <tr id="paidby">
+                <td>
+                  <select multiple="multiple" data-bind="options: items, selectedOptions: selectedItems, multiselect: multiSelectInitOptions"></select>
+                </td>
+                <td><input id="email" placeholder="user@gmail.com" type="text"/></td>
+                <th><button data-bind="click: addItem" class="btn btn-primary">Add</button></th>
+              </tr>
+
+              <tr id="attendees">
+                <td>
+                  <select multiple="multiple" data-bind="options: items, selectedOptions: selectedItems, multiselect: multiSelectInitOptions"></select>
+                </td>
+              </tr>
+
+              <tr >
+                <span class="input-group-addon">$</span>
+                <input id="amount" type="text" placeholder="e.g. 64 - 10" class="form-control">
+              </tr>
+
+              <tr >
+                <span class="input-group-addon">Summary</span>
+                <input id="summary" type="text" class="form-control">
+              </tr>
+            </table>
+<form method="post" enctype="multipart/form-data" >
+            <input id="filebox" type="file" accept="image/*" capture>
+            <button id="submit" data-bind="click: submit"
+                    class="btn btn-danger btn-large">
+              Submit
+            </button>
+            </form>
+        </div>
+        <div class="span4">
+          <span>{{cur_head|tojson}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>var candidates = {{ candidates|tojson }}; </script>
+  <script src="{{ url_for('static', filename='js/select.js') }}"></script>
+</body>
+</html>
